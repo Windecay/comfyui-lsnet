@@ -19,7 +19,7 @@ from timm.data.transforms_factory import create_transform
 from timm.models import create_model
 
 # Ensure custom LSNet artist models are registered with timm
-from model import lsnet_artist  # noqa: F401
+from lsnet_model import lsnet_artist  # noqa: F401
 
 
 def get_args_parser():

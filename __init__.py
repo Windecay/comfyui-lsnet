@@ -16,7 +16,7 @@ from timm.data import resolve_data_config
 from timm.data.transforms_factory import create_transform
 from timm.models import create_model
 
-from model import lsnet_artist  # noqa: F401
+from lsnet_model import lsnet_artist  # noqa: F401
 
 from inference_artist import (
     load_checkpoint_state,
