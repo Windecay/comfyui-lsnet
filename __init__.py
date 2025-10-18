@@ -54,7 +54,7 @@ class LSNetModelLoader:
     def load(self, model_folder, device):
         base_dir = os.path.join(folder_paths.models_dir, 'lsnet')
         model_dir = os.path.join(base_dir, model_folder)
-        checkpoint_path = os.path.join(model_dir, "checkpoint.pth")
+        checkpoint_path = os.path.join(model_dir, "best_checkpoint.pth")
         csv_path = os.path.join(model_dir, "class_mapping.csv")
 
         if not os.path.exists(checkpoint_path):
