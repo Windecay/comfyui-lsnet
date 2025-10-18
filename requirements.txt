@@ -1,9 +1,8 @@
-einops==0.4.1
+einops>=0.4.1
 fvcore
 easydict
 matplotlib
 yacs
-scikit-image==0.19.3
 wandb
 torch>=2.4.1
 scikit-learn>=1.0
