@@ -48,6 +48,7 @@ class LSNetModelLoader:
         }
 
     RETURN_TYPES = ("LSNET_MODEL",)
+    RETURN_NAMES = ("model",)
     FUNCTION = "load"
     CATEGORY = "LSNet"
 
@@ -99,6 +100,7 @@ class LSNetArtistInferenceNode:
         }
 
     RETURN_TYPES = ("STRING", "STRING")
+    RETURN_NAMES = ("tag_string", "json_output")
     FUNCTION = "process"
     CATEGORY = "LSNet"
 
@@ -158,6 +160,7 @@ class LSNetArtistSimilarityNode:
         }
 
     RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("similarity_json",)
     FUNCTION = "process"
     CATEGORY = "LSNet"
 
@@ -212,6 +215,7 @@ class LSNetCommonFeaturesNode:
         }
 
     RETURN_TYPES = ("TENSOR",)
+    RETURN_NAMES = ("common_features",)
     FUNCTION = "process"
     CATEGORY = "LSNet"
 
@@ -265,6 +269,7 @@ class LSNetClusteringNode:
         }
 
     RETURN_TYPES = ("STRING", "IMAGE")
+    RETURN_NAMES = ("clustering_json", "visualization")
     FUNCTION = "cluster"
     CATEGORY = "LSNet"
 
@@ -356,6 +361,7 @@ class LSNetFeatureComparisonNode:
         }
 
     RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("comparison_json",)
     FUNCTION = "compare"
     CATEGORY = "LSNet"
 
@@ -411,6 +417,7 @@ class LSNetArtistImageConnector:
         }
 
     RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("stacked_images",)
     FUNCTION = "connect"
     CATEGORY = "LSNet"
 
