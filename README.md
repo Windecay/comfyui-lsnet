@@ -2,7 +2,7 @@
 
 ### *「我这双眼睛，能将黑暗看得一清二楚」*
 
-                                                     —— 宇智波佐助
+  —— 宇智波佐助
 
 ![阿吗特拉斯](https://github.com/user-attachments/assets/a9d16b72-b577-4458-bc10-604eb82fefea)
 
