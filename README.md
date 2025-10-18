@@ -32,7 +32,7 @@
 
 在 ComfyUI 的`models`目录下，新建名为`lsnet`的文件夹（专门存放 LSNet 相关模型文件）；
 
-进入`lsnet`文件夹后，可随意创建一个子文件夹（如 “checkpoints”“kaloscope\_core” 等，名称无强制要求，用于归类核心文件）。
+进入`lsnet`文件夹后，可随意创建一个子文件夹（如 “checkpoints”“kaloscope” 等，名称无强制要求，用于归类核心文件）。
 
 目录结构示例：
 
@@ -43,13 +43,13 @@ ComfyUI/
 
 └── models/
 
-&#x20;   └── lsnet/
+       └── lsnet/
 
-&#x20;       └── 子文件夹名称/  # 例："sharingan\_checkpoints"
+           └── 子文件夹名称/  # 例："sharingan" 或 “kaloscope”
 
-&#x20;           ├── best\_checkpoint.pth
+               ├── best_checkpoint.pth
 
-&#x20;           └── class\_mapping.csv
+               └── class_mapping.csv
 ```
 
 相关操作截图：
