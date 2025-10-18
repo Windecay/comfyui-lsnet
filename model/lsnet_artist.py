@@ -129,8 +129,8 @@ default_cfgs_artist = dict(
     lsnet_t_artist = _cfg_artist(),
     lsnet_s_artist = _cfg_artist(),
     lsnet_b_artist = _cfg_artist(),
-    lsnet_l_artist = _cfg_artist(),  # Large model for massive training
-    lsnet_xl_artist = _cfg_artist(), # Extra Large model for 100k+ classes
+    lsnet_l_artist = _cfg_artist(),
+    lsnet_xl_artist = _cfg_artist(),
 )
 
 
@@ -151,7 +151,6 @@ def _create_lsnet_artist(variant, pretrained=False, **kwargs):
 @register_model
 def lsnet_t_artist(num_classes=1000, distillation=False, pretrained=False, 
                    feature_dim=None, use_projection=True, **kwargs):
-    """LSNet-T for Artist Style Classification"""
     model = _create_lsnet_artist(
         "lsnet_t_artist",
         pretrained=pretrained,
@@ -172,7 +171,6 @@ def lsnet_t_artist(num_classes=1000, distillation=False, pretrained=False,
 @register_model
 def lsnet_s_artist(num_classes=1000, distillation=False, pretrained=False,
                    feature_dim=None, use_projection=True, **kwargs):
-    """LSNet-S for Artist Style Classification"""
     model = _create_lsnet_artist(
         "lsnet_s_artist",
         pretrained=pretrained,
@@ -193,7 +191,6 @@ def lsnet_s_artist(num_classes=1000, distillation=False, pretrained=False,
 @register_model
 def lsnet_b_artist(num_classes=1000, distillation=False, pretrained=False,
                    feature_dim=None, use_projection=True, **kwargs):
-    """LSNet-B for Artist Style Classification"""
     model = _create_lsnet_artist(
         "lsnet_b_artist",
         pretrained=pretrained,
@@ -214,7 +211,6 @@ def lsnet_b_artist(num_classes=1000, distillation=False, pretrained=False,
 @register_model
 def lsnet_l_artist(num_classes=1000, distillation=False, pretrained=False,
                    feature_dim=None, use_projection=True, **kwargs):
-    """LSNet-L for Artist Style Classification (Large model for massive training)"""
     model = _create_lsnet_artist(
         "lsnet_l_artist",
         pretrained=pretrained,
@@ -235,7 +231,6 @@ def lsnet_l_artist(num_classes=1000, distillation=False, pretrained=False,
 @register_model
 def lsnet_xl_artist(num_classes=1000, distillation=False, pretrained=False,
                     feature_dim=None, use_projection=True, **kwargs):
-    """LSNet-XL for Artist Style Classification (Extra Large model for massive datasets with 100k+ classes)"""
     model = _create_lsnet_artist(
         "lsnet_xl_artist",
         pretrained=pretrained,
