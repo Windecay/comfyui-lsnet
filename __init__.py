@@ -144,7 +144,8 @@ class LSNetArtistInferenceNode:
         # Prepare outputs
         tags = [res['class_name'] for res in results]
         tag_string = ",".join(tags)
-        json_output = json.dumps(results, ensure_ascii=False)
+        tag_dict = {res['class_name']: res['probability'] for res in results}
+        json_output = json.dumps(tag_dict, ensure_ascii=False)
 
         return (tag_string, json_output)
 
