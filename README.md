@@ -90,3 +90,17 @@ pip install -r requirements.txt
 ### 训练代码
 
 https://github.com/spawner1145/lsnet-test.git
+
+## Citation
+
+```BibTeX
+@misc{wang2025lsnetlargefocussmall,
+      title={LSNet: See Large, Focus Small}, 
+      author={Ao Wang and Hui Chen and Zijia Lin and Jungong Han and Guiguang Ding},
+      year={2025},
+      eprint={2503.23135},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2503.23135}, 
+}
+```
