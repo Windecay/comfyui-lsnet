@@ -30,7 +30,6 @@ from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 class LSNetModelLoader:
     @classmethod
