@@ -82,3 +82,11 @@ pip install -r requirements.txt
 ![基础推理界面（含LSNet核心节点）](https://github.com/user-attachments/assets/28cc2820-ff5d-4290-8ac2-339763947e91)
 
 聚类暂时不作示例，内有其他节点供开发者使用
+
+### 致谢
+
+感谢 [@heathcliff01](https://huggingface.co/heathcliff01) 训练模型
+
+### 训练代码
+
+https://github.com/spawner1145/lsnet-test.git
