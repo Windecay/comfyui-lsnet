@@ -1,7 +1,3 @@
-"""
-LSNet for Artist Style Classification and Clustering
-支持画师风格的分类和聚类任务
-"""
 import torch
 import torch.nn as nn
 from .lsnet import LSNet, Conv2d_BN, BN_Linear
@@ -10,16 +6,6 @@ from timm.models import build_model_with_cfg
 
 
 class LSNetArtist(LSNet):
-    """
-    LSNet模型用于画师风格分类和聚类
-    
-    特点:
-    - 训练时使用分类头进行监督学习
-    - 推理时可选择是否使用分类头
-    - 去掉分类头输出特征向量用于聚类
-    - 保留分类头可以做风格分类
-    """
-    
     def __init__(self, 
                  img_size=224,
                  patch_size=8,
@@ -87,16 +73,12 @@ class LSNetArtist(LSNet):
     
     def forward(self, x, return_features=False):
         """
-        前向传播
+        x: 输入图像
+        return_features: 是否只返回特征向量（用于聚类）
+                        False时返回分类logits（用于分类）
         
-        Args:
-            x: 输入图像
-            return_features: 是否只返回特征向量（用于聚类）
-                           False时返回分类logits（用于分类）
-        
-        Returns:
-            如果return_features=True: 返回特征向量 (batch_size, feature_dim)
-            如果return_features=False: 返回分类logits (batch_size, num_classes)
+        如果return_features=True: 返回特征向量 (batch_size, feature_dim)
+        如果return_features=False: 返回分类logits (batch_size, num_classes)
         """
         features = self.forward_features(x)
         
@@ -116,13 +98,13 @@ class LSNetArtist(LSNet):
     
     def get_features(self, x):
         """
-        便捷方法：提取特征向量
+        提取特征向量
         """
         return self.forward(x, return_features=True)
     
     def classify(self, x):
         """
-        便捷方法：进行分类
+        进行分类
         """
         return self.forward(x, return_features=False)
 
@@ -240,9 +222,9 @@ def lsnet_l_artist(num_classes=1000, distillation=False, pretrained=False,
         distillation=distillation,
         img_size=224,
         patch_size=8,
-        embed_dim=[160, 320, 480, 640],  # 更大的embed_dim
-        depth=[6, 8, 12, 14],           # 更深的网络
-        num_heads=[4, 4, 4, 4],          # 更多的注意力头
+        embed_dim=[160, 320, 480, 640],
+        depth=[6, 8, 12, 14],
+        num_heads=[4, 4, 4, 4],
         feature_dim=feature_dim,
         use_projection=use_projection,
         **kwargs
@@ -261,9 +243,9 @@ def lsnet_xl_artist(num_classes=1000, distillation=False, pretrained=False,
         distillation=distillation,
         img_size=224,
         patch_size=8,
-        embed_dim=[192, 384, 576, 768],  # 超大embed_dim，支持10万+类别
-        depth=[8, 12, 16, 20],           # 超深网络，学习复杂特征
-        num_heads=[6, 6, 6, 6],           # 更多注意力头
+        embed_dim=[192, 384, 576, 768],
+        depth=[8, 12, 16, 20],
+        num_heads=[6, 6, 6, 6],
         feature_dim=feature_dim,
         use_projection=use_projection,
         **kwargs
