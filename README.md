@@ -26,6 +26,8 @@
 
 仓库地址：[ht](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[tps:/](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[/hugg](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ingfa](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ce.co](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[/heat](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[hclif](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[f01/K](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[alosc](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ope/t](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ree/m](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ain](https://huggingface.co/heathcliff01/Kaloscope/tree/main)
 
+或者在魔搭下载：https://www.modelscope.cn/models/Heathcliff02/Kaloscope/files
+
 ## 第二步：文件放置与环境配置
 
 ### 1. 创建目录结构
