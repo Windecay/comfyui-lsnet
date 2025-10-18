@@ -24,9 +24,9 @@
 
 * `class_mapping.csv`（*风格类别映射配置文件*，适配不同画风标签的识别与归类）
 
-仓库地址：[ht](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[tps:/](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[/hugg](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ingfa](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ce.co](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[/heat](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[hclif](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[f01/K](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[alosc](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ope/t](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ree/m](https://huggingface.co/heathcliff01/Kaloscope/tree/main)[ain](https://huggingface.co/heathcliff01/Kaloscope/tree/main)
+huggingface仓库地址：https://huggingface.co/heathcliff01/Kaloscope/tree/main
 
-或者在魔搭下载：https://www.modelscope.cn/models/Heathcliff02/Kaloscope/files
+或者在modelscope下载：https://www.modelscope.cn/models/Heathcliff02/Kaloscope/files
 
 ## 第二步：文件放置与环境配置
 
