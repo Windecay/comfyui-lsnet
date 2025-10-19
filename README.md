@@ -8,6 +8,8 @@
 
 > “*Kaloscope*”（万花筒）致敬万花筒写轮眼，象征忍术(画风)复刻能力
 
+> 该插件支持comfyui插件，webui插件和单独启动三种方式运行
+
 ## 核心能力
 
 基于 *LSNet* 技术核心，本工具聚焦两大核心场景：
@@ -37,7 +39,6 @@ huggingface仓库地址：https://huggingface.co/heathcliff01/Kaloscope/tree/mai
 进入`lsnet`文件夹后，可随意创建一个子文件夹（如 “checkpoints”“kaloscope” 等，名称无强制要求，用于归类核心文件）。
 
 目录结构示例：
-
 
 
 ```
@@ -83,6 +84,8 @@ pip install triton-windows
 1. 按常规方式启动 ComfyUI
 
 2. 在画风分析工作流中，调用 LSNet 相关节点，即可触发 “画风分类” 或 “画风聚类” 功能
+
+> ps:目前版本该插件已经可以单独启动和作为webui插件启动，单独启动在项目根目录运行python -m scripts.app,模型路径为根目录下models/lsnet文件夹内，webui插件启动和comfyui差不多
 
 ### 使用示例
 
