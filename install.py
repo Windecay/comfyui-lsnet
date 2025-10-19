@@ -2,7 +2,6 @@ import launch
 import importlib
 from packaging.version import Version
 from packaging.requirements import Requirement
-import platform
 
 def is_installed(pip_package):
     """
@@ -47,10 +46,6 @@ webui_packages = [
     "python-multipart"
 ]
 requirements.extend(webui_packages)
-
-# Add platform-specific packages
-if platform.system() == "Windows":
-    requirements.append("triton-windows")
 
 for req in requirements:
     if not is_installed(req):
