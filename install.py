@@ -1,5 +1,6 @@
 import launch
 import importlib
+import sys
 from packaging.version import Version
 from packaging.requirements import Requirement
 
@@ -34,9 +35,27 @@ def is_installed(pip_package):
         return False
 
 
-# Read requirements from requirements.txt
-with open("extensions/comfyui-lsnet/requirements.txt", "r") as f:
-    requirements = [line.strip() for line in f if line.strip() and not line.startswith("#") and not line.startswith(";")]
+# Define requirements directly
+requirements = [
+    "einops>=0.8.1",
+    "fvcore",
+    "easydict",
+    "matplotlib>=3.3.0",
+    "yacs",
+    "scikit-image",
+    "wandb",
+    "torch>=2.4.1",
+    "torchvision>=0.11.0",
+    "timm>=1.0.20",
+    "numpy>=1.19.0",
+    "Pillow>=8.0.0",
+    "scikit-learn>=1.0.0",
+    "tqdm>=4.60.0"
+]
+
+# Add triton-windows only on Windows
+if sys.platform == 'win32':
+    requirements.append("triton-windows")
 
 # Add webui packages
 webui_packages = [
