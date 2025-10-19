@@ -1,6 +1,6 @@
 [project]
 name = "lsnet"
-description = "阿妈特拉斯，画风反推"
+description = ""
 version = "1.0.0"
 license = {file = "LICENSE"} 
 # classifiers = [
