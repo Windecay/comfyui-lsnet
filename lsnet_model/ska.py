@@ -225,10 +225,22 @@ class SKA(torch.nn.Module):
         try:
             return SkaFn.apply(x, w)  # type: ignore
         except Exception as e:
-            if not SKA._fallback_logged:
-                logging.getLogger(__name__).info(
-                    "[comfyui-lsnet][INFO]SkaFn failed; falling back to PyTorchSkaFn. " +
-                    f"(This issue is likely due to a bad triton setup but can be usually ignored) Error: {e}", exc_info=False
-                )
-                SKA._fallback_logged = True
+            msg = str(e)
+            logger = logging.getLogger(__name__)
+            if "Pointer argument (at 0) cannot be accessed from Triton (cpu tensor?)" in msg:
+                if not SKA._fallback_logged:
+                    logger.info(
+                        "[comfyui-lsnet][INFO] SkaFn requires GPU due to Triton; CPU input detected. "
+                        f"Using PyTorchSkaFn fallback. (Error message: {msg})",
+                        exc_info=False,
+                    )
+                    SKA._fallback_logged = True
+            else:
+                if not SKA._fallback_logged:
+                    logger.info(
+                        "[comfyui-lsnet][INFO] SkaFn failed; falling back to PyTorchSkaFn. "
+                        f"(This issue is likely due to a bad Triton setup but can usually be ignored) Error: {msg}",
+                        exc_info=False,
+                    )
+                    SKA._fallback_logged = True
             return PyTorchSkaFn.apply(x, w)  # type: ignore
