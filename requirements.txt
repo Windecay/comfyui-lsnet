@@ -1,4 +1,4 @@
-einops
+einops>=0.8.1
 fvcore
 easydict
 matplotlib
@@ -8,7 +8,7 @@ wandb
 torch>=2.4.1
 torchvision>=0.11.0
 
-timm
+timm>=1.0.20
 
 numpy>=1.19.0
 Pillow>=8.0.0
@@ -19,10 +19,9 @@ matplotlib>=3.3.0
 
 tqdm>=4.60.0
 
-# 可选：加速训练
 # tensorboard>=2.8.0
-# apex  # 混合精度训练（需要从源码安装）
+# apex
 
-# Windows环境下安装triton-windows
+# Windows
 ; sys_platform == 'win32'
 triton-windows
