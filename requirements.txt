@@ -23,5 +23,4 @@ tqdm>=4.60.0
 # apex
 
 # Windows
-; sys_platform == 'win32'
-triton-windows
+triton-windows; sys_platform == 'win32'
