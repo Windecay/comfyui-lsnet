@@ -69,7 +69,7 @@ ComfyUI/
 将上述两个文件放入子文件夹后，执行以下命令安装 LSNet 运行所需依赖：
 
 ```
-pip install -r requirements.txt
+pip install -r requirements.txt --upgrade
 ```
 
 如果你是windows，记得:
