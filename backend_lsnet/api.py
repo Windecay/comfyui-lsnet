@@ -176,7 +176,7 @@ class Api:
         # For simplicity, just return a message since inference is quick
         return CancelResponse(info="No active inference to cancel")
 
-def on_app_started(_demux, app, _server):
+def on_app_started(demo, app):
     """Called when the webui app starts"""
     queue_lock = webui_queue_lock or Lock()
     api = Api(app, queue_lock)
