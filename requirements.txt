@@ -22,3 +22,7 @@ tqdm>=4.60.0
 # 可选：加速训练
 # tensorboard>=2.8.0
 # apex  # 混合精度训练（需要从源码安装）
+
+# Windows环境下安装triton-windows
+; sys_platform == 'win32'
+triton-windows
