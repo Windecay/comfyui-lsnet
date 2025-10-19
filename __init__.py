@@ -7,7 +7,9 @@ from PIL import Image
 import numpy as np
 from pathlib import Path
 from typing import Dict, Optional
-
+import requests
+from tqdm import tqdm
+import urllib.request
 sys.path.append(os.path.dirname(__file__))
 
 import folder_paths
@@ -85,6 +87,123 @@ class LSNetModelLoader:
         }
 
         return (model_bundle,)
+
+class LSNetModelDownloader:
+    @classmethod
+    def INPUT_TYPES(s):
+        file_types = ["best_checkpoint.pth"]  # 只显示一个文件选项
+        return {
+            "required": {
+                "file_to_download": (file_types, {"default": "best_checkpoint.pth"}),
+                "device": ("STRING", {"default": "cuda"}),
+                "force_download": ("BOOLEAN", {"default": False}),
+            }
+        }
+
+    RETURN_TYPES = ("LSNET_MODEL",)
+    RETURN_NAMES = ("model",)
+    FUNCTION = "download_and_load"
+    CATEGORY = "LSNet"
+
+    FILE_URLS = {
+        "best_checkpoint.pth": "https://www.modelscope.cn/models/Heathcliff02/Kaloscope/resolve/master/best_checkpoint.pth",
+        "class_mapping.csv": "https://www.modelscope.cn/models/Heathcliff02/Kaloscope/resolve/master/class_mapping.csv"
+    }
+
+    def download_file(self, url, destination):
+        """从URL下载文件到目标位置"""
+        try:
+            # 创建目录（如果不存在）
+            os.makedirs(os.path.dirname(destination), exist_ok=True)
+
+            print(f"开始下载文件: {os.path.basename(destination)} 从 {url}")
+
+            response = urllib.request.urlopen(url)
+            file_size = int(response.getheader('Content-Length', 0))
+
+            with tqdm(total=file_size, unit='B', unit_scale=True, desc=os.path.basename(destination)) as pbar:
+                with open(destination, 'wb') as file:
+                    while True:
+                        chunk = response.read(8192)
+                        if not chunk:
+                            break
+                        file.write(chunk)
+                        pbar.update(len(chunk))
+
+            print(f"文件已下载完成: {destination}")
+            return True
+        except Exception as e:
+            print(f"下载失败: {str(e)}")
+            if os.path.exists(destination):
+                os.remove(destination)
+            return False
+
+    def download_and_load(self, file_to_download, device, force_download):
+        # 设置下载路径 - 默认使用kaloscope文件夹
+        base_dir = os.path.join(folder_paths.models_dir, 'lsnet', 'kaloscope')
+        checkpoint_path = os.path.join(base_dir, "best_checkpoint.pth")
+        csv_path = os.path.join(base_dir, "class_mapping.csv")
+
+        both_files_exist = os.path.exists(checkpoint_path) and os.path.exists(csv_path)
+
+        if file_to_download == "best_checkpoint.pth" and (force_download or not both_files_exist):
+            files_to_download = ["best_checkpoint.pth", "class_mapping.csv"]
+            for file_name in files_to_download:
+                file_path = checkpoint_path if file_name == "best_checkpoint.pth" else csv_path
+                if force_download or not os.path.exists(file_path):
+                    print(f"正在下载 {file_name} 到: {file_path}")
+                    if not self.download_file(self.FILE_URLS[file_name], file_path):
+                        raise RuntimeError(f"无法下载文件: {file_path}")
+                else:
+                    print(f"文件 {file_name} 已存在，跳过下载")
+
+        files_exist = True
+        missing_files = []
+
+        if not os.path.exists(checkpoint_path):
+            files_exist = False
+            missing_files.append(checkpoint_path)
+
+        if not os.path.exists(csv_path):
+            files_exist = False
+            missing_files.append(csv_path)
+
+        if not files_exist:
+            missing_info = "\n".join(missing_files)
+            raise FileNotFoundError(f"加载模型需要的以下文件未找到:\n{missing_info}\n请先下载所有必要文件")
+
+        try:
+            class_mapping = load_class_mapping(csv_path)
+            state_dict = load_checkpoint_state(checkpoint_path)
+            state_dict = normalize_state_dict_keys(state_dict)
+            num_classes = resolve_num_classes(None, class_mapping, state_dict)
+            feature_dim = resolve_feature_dim(None, state_dict)
+
+            model = create_model(
+                'lsnet_xl_artist',
+                pretrained=False,
+                num_classes=num_classes,
+                feature_dim=feature_dim,
+            )
+
+            model.load_state_dict(state_dict, strict=False)
+            model.to(device)
+            model.eval()
+
+            config = resolve_data_config({}, model=model)
+            transform = create_transform(**config)
+
+            model_bundle = {
+                'model': model,
+                'transform': transform,
+                'class_mapping': class_mapping,
+                'device': device
+            }
+
+            return (model_bundle,)
+        except Exception as e:
+            print(f"模型加载失败: {str(e)}")
+            raise RuntimeError(f"模型加载失败: {str(e)}")
 
 class LSNetArtistInferenceNode:
     @classmethod
@@ -436,6 +555,7 @@ class LSNetArtistImageConnector:
 
 NODE_CLASS_MAPPINGS = {
     "LSNetModelLoader": LSNetModelLoader,
+    "LSNetModelDownloader": LSNetModelDownloader,
     "LSNetArtistInference": LSNetArtistInferenceNode,
     "LSNetArtistSimilarity": LSNetArtistSimilarityNode,
     "LSNetCommonFeatures": LSNetCommonFeaturesNode,
@@ -446,6 +566,7 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "LSNetModelLoader": "LSNet Model Loader",
+    "LSNetModelDownloader": "LSNet Model (Down)loader",
     "LSNetArtistInference": "LSNet Artist Inference",
     "LSNetArtistSimilarity": "LSNet Artist Similarity",
     "LSNetCommonFeatures": "LSNet Common Features",

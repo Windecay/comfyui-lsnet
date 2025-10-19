@@ -7,7 +7,7 @@ scikit-image
 wandb
 torch>=2.4.1
 torchvision>=0.11.0
-
+requests
 timm>=1.0.20
 
 numpy>=1.19.0
